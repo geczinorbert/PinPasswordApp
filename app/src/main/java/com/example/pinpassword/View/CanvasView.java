@@ -81,20 +81,19 @@ public class CanvasView extends View {
         float dx = Math.abs(x - mX);
         float dy = Math.abs(y - mY);
         //Log.d( TAG, " moveTouch x: " + x +  " Y: " + y + " Finger: " + fingerSize);
-        if( dx >= TOLERANCE || dy >= TOLERANCE){
-            mPath.quadTo(mX,mY,(x + mX)/2 , (y + mY)/2);
+        if( dx >= TOLERANCE || dy >= TOLERANCE) {
+            mPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
             mX = x;
             mY = y;
+            Point point = new Point();
+            point.setxCoordinate(x);
+            point.setyCoordinate(y);
+            point.setFingerSize(fingerSize);
+            Date date = new Date();
+            long time = date.getTime();
+            point.setTimeStamp(time);
+            pointsArray.add(point);
         }
-
-        Point point = new Point();
-        point.setxCoordinate(x);
-        point.setyCoordinate(y);
-        point.setFingerSize(fingerSize);
-        Date date= new Date();
-        long time = date.getTime();
-        point.setTimeStamp(time);
-        pointsArray.add(point);
     }
     public void clearCanvas(){
         pointsArray.clear();
